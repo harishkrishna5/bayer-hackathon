@@ -29,14 +29,14 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
     - name: Build Docker image
       run: |
-          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-app:${{ github.sha }}
+          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/bayer-hackathon:${{ github.sha }}
           docker build -t $IMAGE_URI src/appointment
           echo "Built image $IMAGE_URI"
 
       # Step 7: Push Docker image to ECR
     - name: Push Docker image to ECR
       run: |
-          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-app:${{ github.sha }}
+          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/bayer-hackathon:${{ github.sha }}
           docker push $IMAGE_URI
   
       
