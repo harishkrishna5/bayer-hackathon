@@ -28,6 +28,23 @@ jobs:
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
 
+     # Build the Docker image
+    - name: Build Docker image
+      run: |
+          docker build -t ${{ secrets.ECR_REPOSITORY }} .
+      
+      # Tag the Docker image with the ECR repository URI
+    - name: Tag Docker image
+      run: |
+          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
+          docker tag ${{ secrets.ECR_REPOSITORY }} $IMAGE_URI
+
+      # Push the Docker image to ECR
+    - name: Push Docker image to Amazon ECR
+      run: |
+          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
+          docker push $IMAGE_URI
+
     
 
     
