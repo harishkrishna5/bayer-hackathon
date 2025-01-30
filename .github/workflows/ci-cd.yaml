@@ -37,8 +37,8 @@ jobs:
       # Push the Docker image to ECR
     - name: Push Docker image to Amazon ECR
       run: |
-          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
-          docker push $IMAGE_URI
+         
+          docker push 686255943556.dkr.ecr.ap-south-1.amazonaws.com/bayer-hackathon
 
     
 
